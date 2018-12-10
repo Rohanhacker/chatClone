@@ -59,18 +59,22 @@ class App extends Component {
    * Set new message to allMessages in state
    */
   handleMessage = msg => {
-    const data = JSON.parse(msg.data)
-    const { allMessages } = this.state
-    const message = {
-      ...data,
-      from: data.to,
-      to: "me",
+    try {
+      const data = JSON.parse(msg.data)
+      const { allMessages } = this.state
+      const message = {
+        ...data,
+        from: data.to,
+        to: "me",
+      }
+      const phone = message.from
+      const selectedMessages = [...(allMessages[phone] || []), message]
+      this.setState({
+        allMessages: { ...allMessages, [phone]: selectedMessages },
+      })
+    } catch (e) {
+      console.error(e)
     }
-    const phone = message.from
-    const selectedMessages = [...(allMessages[phone] || []), message]
-    this.setState({
-      allMessages: { ...allMessages, [phone]: selectedMessages },
-    })
   }
   /**
    * clear placeholder on focus
