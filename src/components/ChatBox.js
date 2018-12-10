@@ -33,6 +33,9 @@ class ChatBox extends Component {
       prevProps.allMessages[selectedPhone]
     )
   }
+  /**
+   * Scroll to bottom of the page if selected friend or message is updated
+   */
   componentDidUpdate(prevProps) {
     const { selectedPhone } = this.props
     if (

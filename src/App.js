@@ -55,6 +55,9 @@ class App extends Component {
     console.log("E", error)
     // send to sentry
   }
+  /**
+   * Set new message to allMessages in state
+   */
   handleMessage = msg => {
     const data = JSON.parse(msg.data)
     const { allMessages } = this.state
@@ -69,6 +72,9 @@ class App extends Component {
       allMessages: { ...allMessages, [phone]: selectedMessages },
     })
   }
+  /**
+   * clear placeholder on focus
+   */
   onInputFocus = e => {
     e.target.placeholder = ""
     this.setState({
@@ -99,6 +105,9 @@ class App extends Component {
   sendMsg = msg => {
     this.ws.json(msg)
   }
+  /**
+   * post message on enter and clear msg state
+   */
   onEnter = e => {
     if (!e.shiftKey && e.key === "Enter") {
       e.preventDefault()
